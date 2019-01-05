@@ -1,4 +1,4 @@
-package br.com.ribeiroferreiralucas.b2wchallenge.repositories.mongo;
+package br.com.ribeiroferreiralucas.b2wchallenge.mongopersistence.repositories;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.google.gson.reflect.TypeToken;
 
-import br.com.ribeiroferreiralucas.b2wchallenge.documents.PlanetDocument;
 import br.com.ribeiroferreiralucas.b2wchallenge.dtos.PlanetResponseDTO;
 import br.com.ribeiroferreiralucas.b2wchallenge.model.Planet;
+import br.com.ribeiroferreiralucas.b2wchallenge.mongopersistence.documents.PlanetDocument;
 import br.com.ribeiroferreiralucas.b2wchallenge.repositories.IPlanetRepository;
 
 @Repository

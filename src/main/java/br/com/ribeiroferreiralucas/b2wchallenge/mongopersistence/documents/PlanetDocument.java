@@ -1,4 +1,4 @@
-package br.com.ribeiroferreiralucas.b2wchallenge.documents;
+package br.com.ribeiroferreiralucas.b2wchallenge.mongopersistence.documents;
 
 import javax.validation.constraints.NotEmpty;
 
