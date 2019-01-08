@@ -6,6 +6,8 @@ public class Planet {
 	private String name;
 	private String weather;
 	private String terrain;
+	private Integer appearancesCount;
+
 	public String getId() {
 		return id;
 	}
@@ -31,10 +33,15 @@ public class Planet {
 		this.terrain = terrain;
 	}
 	
+	public Integer getAppearancesCount() {
+		return appearancesCount;
+	}
+	public void setAppearancesCount(Integer appearancesCount) {
+		this.appearancesCount = appearancesCount;
+	}
+	
 	@Override
 	public String toString() {
 		return "Planet [id=" + id + ", name=" + name + ", weather=" + weather + ", terrain=" + terrain + "]";
 	}
-	
-	
 }

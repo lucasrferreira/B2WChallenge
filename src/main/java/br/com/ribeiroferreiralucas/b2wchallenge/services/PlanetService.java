@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ribeiroferreiralucas.b2wchallenge.model.Planet;
+import br.com.ribeiroferreiralucas.b2wchallenge.repositories.IPlanetApparitionsCountRepository;
 import br.com.ribeiroferreiralucas.b2wchallenge.repositories.IPlanetRepository;
 
 @Service
@@ -13,25 +14,43 @@ public class PlanetService implements IPlanetService{
 
 	@Autowired
 	private IPlanetRepository planetRepository;
+	@Autowired
+	private IPlanetApparitionsCountRepository planetApparitionsCountRepository;
 	
 	@Override
-	public Planet insert(Planet planeta) {
-		return planetRepository.save(planeta);
+	public Planet insert(Planet planet) {
+		Planet savedPlanet = planetRepository.save(planet);
+		
+		fillApparitionsCount(savedPlanet);
+		
+		return savedPlanet;
 	}
 
 	@Override
 	public Planet findById(String id) {
-		return planetRepository.findById(id);
+		Planet planet = planetRepository.findById(id);
+		fillApparitionsCount(planet);
+		return planet;
 	}
 
 	@Override
 	public List<Planet> searchByName(String name) {
-		return planetRepository.findByName(name);
+		List<Planet> foundPlanets = planetRepository.findByName(name);
+		
+		for (Planet planet : foundPlanets) {
+			fillApparitionsCount(planet);
+		}
+		
+		return foundPlanets;
 	}
 
 	@Override
 	public Planet update(Planet planet) {
-		return planetRepository.save(planet);
+		Planet savedPlanet = planetRepository.save(planet);
+		
+		fillApparitionsCount(savedPlanet);
+		
+		return savedPlanet;
 	}
 
 	@Override
@@ -41,8 +60,19 @@ public class PlanetService implements IPlanetService{
 
 	@Override
 	public List<Planet> getAll() {
-		return planetRepository.findAll();
+		List<Planet> foundPlanets = planetRepository.findAll();
+		
+		for (Planet planet : foundPlanets) {
+			fillApparitionsCount(planet);
+		}
+		
+		return foundPlanets;
 	}
 	
+	
+	private void fillApparitionsCount(Planet planet) {
+		Integer appearancesCount = planetApparitionsCountRepository.getApparitionsCount(planet.getName());
+		planet.setAppearancesCount(appearancesCount);
+	}
 	
 }
